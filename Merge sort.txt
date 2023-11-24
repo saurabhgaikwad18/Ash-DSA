@@ -1,0 +1,126 @@
+Merge sort:
+
+#include <iostream>
+using namespace std;
+void merge(int arr[], int p, int q, int r)
+{
+	int n1 = q - p + 1;
+	int n2 = r - q;
+	int L[n1], M[n2];
+	for (int i = 0; i < n1; i++)
+		L[i] = arr[p + i];
+	for (int j = 0; j < n2; j++)
+		M[j] = arr[q + 1 + j];
+	int i, j, k;
+	i = 0;
+	j = 0;
+	k = p;
+	while (i < n1 && j < n2)
+	{
+		if (L[i] <= M[j])
+		{
+			arr[k] = L[i];
+			i++;
+		}
+		else
+		{
+			arr[k] = M[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < n1)
+	{
+		arr[k] = L[i];
+		i++;
+		k++;
+	}
+	while (j < n2)
+	{
+		arr[k] = M[j];
+		j++;
+		k++;
+	}
+}
+void mergeSort(int arr[], int l, int r)
+{
+	if (l < r)
+	{
+		int m = l + (r - l) / 2;
+		mergeSort(arr, l, m);
+		mergeSort(arr, m + 1, r);
+		// Merge the sorted subarrays
+		merge(arr, l, m, r);
+	}
+}
+// Print the array
+void printArray(int arr[], int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
+}
+void printsortedArray(int A[], int size)
+{
+	for (int i = size - 1; i >= size - 5; i--)
+	{
+		cout << "Salary of employee " << i + 1 << " is " << A[i] << " " << endl;
+	}
+}
+int main()
+{
+	int n;
+	cout << "\nMERGE SORT " << endl;
+	cout << "Enter the number of employee : " << endl;
+	cin >> n;
+	int arr[n];
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Enter the salary of employee " << i + 1 << " : " << endl;
+		cin >> arr[i];
+	}
+	cout << "salary of employee :" << endl;
+	printArray(arr, n);
+	mergeSort(arr, 0, n - 1);
+	cout << "sorted salary detail of employee are : " << endl
+		 << endl;
+	printArray(arr, n);
+	cout << "\nTop 5 Employee with highest salary are \n"
+		 << endl;
+	printsortedArray(arr, n);
+	return 0;
+}
+
+Output: 
+MERGE SORT
+Enter the number of employee :
+8
+Enter the salary of employee 1 : 
+10000
+Enter the salary of employee 2 : 
+3000
+Enter the salary of employee 3 : 
+2300 
+Enter the salary of employee 4 : 
+5000 
+Enter the salary of employee 5 : 
+4000
+Enter the salary of employee 6 : 
+5600 
+Enter the salary of employee 7 : 
+4590
+Enter the salary of employee 8 : 
+9000
+salary of employee :
+10000 3000 2300 5000 4000 5600 4590 9000 
+sorted salary detail of employee are : 
+
+2300 3000 4000 4590 5000 5600 9000 10000
+
+Top 5 Employee with highest salary are
+
+Salary of employee 8 is 10000
+Salary of employee 7 is 9000
+Salary of employee 6 is 5600
+Salary of employee 5 is 5000
+Salary of employee 4 is 4590
